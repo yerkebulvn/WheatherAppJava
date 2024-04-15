@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 params.put("lat" ,Latitude);
                 params.put("lon",Longitude);
                 params.put("appid",APP_ID);
+                params.put("lang","ru");
                 letsdoSomeNetworking(params);
 
             }
