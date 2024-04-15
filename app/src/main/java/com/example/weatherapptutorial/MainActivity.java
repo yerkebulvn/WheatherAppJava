@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,getApplicationContext().getResources().getString(R.string.data_success),Toast.LENGTH_SHORT).show();
 
                 weatherData weatherD=weatherData.fromJson(response);
-                //updateUI(weatherD);
+                updateUI(weatherD);
                 checkDownloadModel(weatherD);
 
 
@@ -278,5 +278,11 @@ public class MainActivity extends AppCompatActivity {
         {
             mLocationManager.removeUpdates(mLocationListner);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        englishRussianTranslator.close();
     }
 }
