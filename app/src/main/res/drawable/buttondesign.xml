@@ -6,5 +6,5 @@
     >
 
 </corners>
-    <solid android:color="#ffa384"></solid>
+    <solid android:color="@color/button_600"></solid>
 </shape>

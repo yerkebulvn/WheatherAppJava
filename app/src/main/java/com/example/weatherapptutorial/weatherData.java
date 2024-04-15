@@ -3,12 +3,12 @@ package com.example.weatherapptutorial;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class weatherData {
+public class weatherData {  //Ауа райы класы
 
-    private String mTemperature,micon,mcity,mWeatherType;
+    private String mTemperature,micon,mcity,mWeatherType;   //API  ден алынатын айнымалылар
     private int mCondition;
 
-    public static weatherData fromJson(JSONObject jsonObject)
+    public static weatherData fromJson(JSONObject jsonObject)   //JSON файлдан ауа райы туралы мәліметтерді алу
     {
 
         try
@@ -25,7 +25,7 @@ public class weatherData {
         }
 
 
-         catch (JSONException e) {
+         catch (JSONException e) {      //Қателер пайда болып жатса
             e.printStackTrace();
             return null;
         }
@@ -34,7 +34,7 @@ public class weatherData {
     }
 
 
-    private static String updateWeatherIcon(int condition)
+    private static String updateWeatherIcon(int condition)  //Ауа райының күйіне байланысты экрандағы иконкаларды өзгерту функциясы
     {
         if(condition>=0 && condition<=300)
         {
@@ -93,7 +93,7 @@ public class weatherData {
 
     public String getmTemperature() {
         return mTemperature+"°C";
-    }
+    }   //Мәліметтерді класстан алу функциялары
 
     public String getMicon() {
         return micon;
