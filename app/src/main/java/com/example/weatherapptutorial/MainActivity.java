@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 RequestParams params =new RequestParams();
                 params.put("lat" ,Latitude);
                 params.put("lon",Longitude);
-                params.put("appid",APP_ID);
                 params.put("lang","ru");
+                params.put("appid",APP_ID);
                 letsdoSomeNetworking(params);
 
             }
