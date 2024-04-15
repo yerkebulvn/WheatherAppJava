@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Ауа райы</string>
+    <string name="enter_city_name">Қаланың аты</string>
+    <string name="new_city_btn">Жаңадан қала іздегіңіз келсе</string>
+    <string name="location_success">Локацияңыз сәтті анықталды</string>
+    <string name="location_access_denied">GPS мәліметтерін алуға рұқсат берілмеді</string>
+    <string name="data_success">Мәліметтер сәтті алынды</string>
 </resources>

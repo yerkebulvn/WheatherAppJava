@@ -18,15 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.mlkit.common.model.DownloadConditions;
-import com.google.mlkit.nl.translate.TranslateLanguage;
-import com.google.mlkit.nl.translate.Translation;
-import com.google.mlkit.nl.translate.Translator;
-import com.google.mlkit.nl.translate.TranslatorOptions;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -45,14 +36,7 @@ public class MainActivity extends AppCompatActivity {
     final float MIN_DISTANCE = 1000;
     final int REQUEST_CODE = 101;
 
-    //Переводчикті іске қосу (сайттан мәліметтер ағылшын тілінде келеді)
-    TranslatorOptions options =
-            new TranslatorOptions.Builder()
-                    .setSourceLanguage(TranslateLanguage.ENGLISH)
-                    .setTargetLanguage(TranslateLanguage.RUSSIAN)
-                    .build();
-    final Translator englishRussianTranslator =
-            Translation.getClient(options);
+
     String Location_Provider = LocationManager.GPS_PROVIDER;    //GPS орналасу орынын алу провайдері
 
     TextView NameofCity, weatherState, Temperature; //Экранға текст шығаратын компоненттер
@@ -75,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mweatherIcon = findViewById(R.id.weatherIcon);
         mCityFinder = findViewById(R.id.cityFinder);
         NameofCity = findViewById(R.id.cityName);
+
 
         mCityFinder.setOnClickListener(new View.OnClickListener() { //Қаланы іздеу батырмасының тыңдаушысы
             @Override
@@ -208,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
 
                 weatherData weatherD=weatherData.fromJson(response);
                 updateUI(weatherD);
-                checkDownloadModel(weatherD);
 
 
                // super.onSuccess(statusCode, headers, response);
@@ -224,50 +208,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    void checkDownloadModel(weatherData weather){
-        DownloadConditions conditions = new DownloadConditions.Builder()
-                .requireWifi()
-                .build();
-        englishRussianTranslator.downloadModelIfNeeded(conditions)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(weather);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        updateUIwithoutTranslate(weather);
-                    }
-                });
-    }
 
-    private void updateUI(weatherData weather){
+    private  void updateUI(weatherData weather){    //Экрандағы мәліметтерді жаңарту функциясы
+
+
         Temperature.setText(weather.getmTemperature());
-        englishRussianTranslator.translate(weather.getMcity())
-                .addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(String s) {
-                        NameofCity.setText(s);
-                    }
-                });
-        englishRussianTranslator.translate(weather.getmWeatherType())
-                .addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(String s) {
-                        weatherState.setText(s);
-                    }
-                });
-        int resourceID = getResources().getIdentifier(weather.getMicon(), "drawable", getPackageName());
+        NameofCity.setText(weather.getMcity());
+        weatherState.setText(weather.getmWeatherType());
+        int resourceID=getResources().getIdentifier(weather.getMicon(),"drawable",getPackageName());
         mweatherIcon.setImageResource(resourceID);
-    }
-    private  void updateUIwithoutTranslate(weatherData weather){    //Экрандағы мәліметтерді жаңарту функциясы
 
-            Temperature.setText(weather.getmTemperature());
-            NameofCity.setText(weather.getMcity());
-            weatherState.setText(weather.getmWeatherType());
-            int resourceID = getResources().getIdentifier(weather.getMicon(), "drawable", getPackageName());
-            mweatherIcon.setImageResource(resourceID);
 
     }
 
@@ -278,11 +228,5 @@ public class MainActivity extends AppCompatActivity {
         {
             mLocationManager.removeUpdates(mLocationListner);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        englishRussianTranslator.close();
     }
 }

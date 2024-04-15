@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242343"
+    android:background="@color/new_background"
     tools:context=".cityFinder">
 
     <ImageView
@@ -25,11 +25,11 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="Enter City Name"
+        android:hint="@string/enter_city_name"
         android:layout_marginLeft="30dp"
         android:textSize="20sp"
         android:background="@drawable/edittextdesign"
-        android:textColor="@color/black"
+        android:textColor="@color/ui_darkest"
         android:imeOptions="actionGo"
         android:id="@+id/searchCity"
         android:inputType="textAutoCorrect"
