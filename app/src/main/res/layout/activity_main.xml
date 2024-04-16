@@ -46,7 +46,7 @@
             android:id="@+id/weatherCondition"
             android:textSize="30sp"
             android:textColor="@color/button_600"
-            android:text="---------"
+            android:text="-"
             android:paddingStart="30sp">
 
         </TextView>
@@ -56,7 +56,7 @@
             android:id="@+id/cityName"
             android:textStyle="bold"
             android:textSize="40sp"
-            android:text="Мммммм___"
+            android:text="-"
             android:paddingStart="30sp"
             android:textColor="@color/ui_darkest">
 
