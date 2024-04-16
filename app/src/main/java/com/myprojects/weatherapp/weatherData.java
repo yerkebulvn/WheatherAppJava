@@ -1,4 +1,4 @@
-package com.example.weatherapptutorial;
+package com.myprojects.weatherapp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
